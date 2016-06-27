@@ -21,9 +21,19 @@ public class WebServer {
 
  public void map(Object key, Text value, Context context
                     ) throws IOException, InterruptedException {
-      String[] itr = value.toString().split("\t");
-        word.set(itr[0]+itr[4]);
-        context.write(word,one);
+      Text s=new Text("edams.ksc.nasa.gov");
+
+     StringTokenizer itr = new StringTokenizer(value.toString(),"\t");
+
+      if(itr.equals(s)){
+        for (int i=0;i<4;i++){
+        word.set(itr.nextToken());
+        }
+	context.write(word,one);
+        }else{
+	context.write(new Text("no"),new IntWritable(0));
+        }
+
     }
  }
 
