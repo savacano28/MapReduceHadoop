@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.util.StringTokenizer;
 
@@ -12,36 +13,23 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class WebServer {
-Text s=new Text();
-
   public static class TokenizerMapper
        extends Mapper<Object, Text, Text, IntWritable>{
 
     private final static IntWritable one = new IntWritable(1);
     private Text word = new Text();
-    private Text page = new Text();
 
-    public void map(Object key, Text value, Context context
+ public void map(Object key, Text value, Context context
                     ) throws IOException, InterruptedException {
-      StringTokenizer itr = new StringTokenizer(value.toString(),"\t");
-	word.set(itr.nextToken());
-		     
-		     for(int i=0;i<4;i++){
-		     word.set(itr.nextToken);
-		     }
-		     
-		     
-	context.write(word,one);
+      String[] itr = value.toString().split("\t");
+        word.set(itr[0]+itr[4]);
+        context.write(word,one);
     }
-    
-    
-    
  }
 
   public static class IntSumReducer
        extends Reducer<Text,IntWritable,Text,IntWritable> {
     private IntWritable result = new IntWritable();
-
 	int max=0;
 	Text mk=new Text();
 
