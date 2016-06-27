@@ -24,8 +24,8 @@ public class WebServer {
       Text s=new Text("edams.ksc.nasa.gov");
 
      StringTokenizer itr = new StringTokenizer(value.toString(),"\t");
-
-      if(itr.equals(s)){
+     word.set(itr.nextToken());
+      if(word.equals(s)){
         for (int i=0;i<4;i++){
         word.set(itr.nextToken());
         }
